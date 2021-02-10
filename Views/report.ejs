@@ -1,0 +1,53 @@
+<!DOCTYPE>
+<html>
+    <head>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      
+    </head>
+    <body>
+      <img src="../images/small.gif" style="display:none"  id="img" / >
+      <input type="button" onclick="tableToExcel('testTable', 'W3C Example Table')" value="Download"><br><br>
+
+		<table style="display:none";  id="testTable" summary="Code page support in different versions of MS Windows." rules="groups" frame="hsides" class="table table-bordered">
+            <% for(var i=0; i < sendobject[0]["userIdArray"].length; i++) { %>
+               <tr>
+                 <td><%= sendobject[0]["userIdArray"][i] %></td>
+                 <td><%= sendobject[1]["EvaluatoionIdArray"][i] %></td>
+                 <td><%= sendobject[2]["scoreArray"][i] %></td>
+               </tr>
+            <% } %>
+            </table> 
+
+   
+     <form action = "http://localhost:2255/cloud/report" method="POST">
+
+
+        <button type = "submit" id = "test">click On</button>
+      
+     </form>
+
+     <button type = "submit" id = "buttonID">test</button>
+    </body>
+    <script type="text/javascript">
+      
+      
+      
+      var tableToExcel = (function() {
+        var uri = 'data:application/vnd.ms-excel;base64,'
+          , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+          , base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) }
+          , format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
+        return function(table, name) {
+          if (!table.nodeType) table = document.getElementById(table)
+          var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+          window.location.href = uri + base64(format(template, ctx))
+        }
+      })()
+      </script>
+    <script>
+
+$('#buttonID').click(function(){
+  $('#img').show();
+});
+    </script>
+</html>

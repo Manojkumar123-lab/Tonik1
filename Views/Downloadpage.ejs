@@ -1,0 +1,95 @@
+<!DOCTYPE>
+<html>
+
+<head>
+  <link rel="stylesheet" href="./css/bootstrap.css">
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <script src="./js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <script src="./js/jquery.min.js"></script>//yes
+  <script src="./js/popper.min.js"></script>
+  <script src="./js/bootstrap.min.js"></script>//yes
+  <script src="./js/jquery-ui.min.js"></script>//yes
+  <script src="./js/jqueryui-slider.js"></script>
+  <script src="./js/jqueryui-timepicker.js"></script>
+  <link rel="stylesheet" href="./css/jquery-ui.min.css">
+  <link rel="stylesheet" href="./css/jqueryui-timepicker.css">
+  <title>Data from MySQL11</title>
+</head>
+<style>
+  body {
+    background: rgb(5, 64, 87);
+  }
+  
+  .content {
+    max-width: 347px;
+    max-height: 449px;
+    margin: auto;
+    background: white;
+    padding: 10px;
+    margin-top: 197px;
+  }
+  </style>
+<body>
+  <img src="../images/small.gif" style="display:none" id="img" />
+  <div class="content">
+    <h2 style="font-size: 28px;color: darkred;margin-bottom: -31px;">Click on Download button</h2>
+  <input type="button" style="margin-top: 40px; margin-left: 109px;" onclick="tableToExcel('testTable', 'W3C Example Table')" value="Download" class="btn btn-primary"
+    st><br><br>
+  </div>
+    <table style="display:none" ; id="testTable" summary="Code page support in different versions of MS Windows."
+      rules="groups" frame="hsides" class="table table-bordered">
+      <thead valign="top" >
+        <tr>
+          <th id="name" name="User" style="font-size: 15px;color: darkred;">User</th>
+          <th id="email" name="User" style="font-size: 15px;color: darkred;">Evaluator</th>
+          <th id="phone" style="font-size: 15px;color: darkred;">Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for(var i=0; i < sendobject[0]["userIdArray"].length; i++) { %>
+          <tr>
+            <td>
+              <%= sendobject[0]["userIdArray"][i] %>
+            </td>
+            <td>
+              <%= sendobject[1]["EvaluatoionIdArray"][i] %>
+            </td>
+            <td>
+              <%= sendobject[2]["scoreArray"][i] %>
+            </td>
+          </tr>
+          <% } %>
+      </tbody>
+    </table>
+
+
+
+
+
+</body>
+<script type="text/javascript">
+
+
+
+  var tableToExcel = (function () {
+    var uri = 'data:application/vnd.ms-excel;base64,'
+      , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+      , base64 = function (s) { return window.btoa(unescape(encodeURIComponent(s))) }
+      , format = function (s, c) { return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; }) }
+    return function (table, name) {
+      if (!table.nodeType) table = document.getElementById(table)
+      var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
+      window.location.href = uri + base64(format(template, ctx))
+    }
+  })()
+</script>
+<script>
+
+$('#buttonID').click(function(){
+  $('#img').show();
+});
+</script>
+
+</html>
